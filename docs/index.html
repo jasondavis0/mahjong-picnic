@@ -4,13 +4,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Lotus Mahjong">
+<meta name="apple-mobile-web-app-title" content="Mahjong Picnic">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head><body>
-<title>Lotus Mahjong</title>
+<title>Mahjong Picnic</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <meta name="theme-color" content="#0a2f29">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -196,8 +196,8 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
     </button></div>
     <div class="logo">
-      <svg viewBox="0 0 200 150" aria-hidden="true" id="logoLotus"></svg>
-      <h1>Lotus<span>Mahjong</span></h1>
+      <svg viewBox="0 0 200 150" aria-hidden="true" id="logoArt"></svg>
+      <h1>Mahjong<span>Picnic</span></h1>
     </div>
     <div class="pill" id="streakPill"></div>
     <button class="play-btn" id="btnPlay"><span class="pl-main" id="playMain">Level 1</span><span class="pl-sub" id="playSub">Tap to play</span></button>
@@ -243,7 +243,7 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
   <!-- WIN -->
   <div class="overlay" id="win" hidden>
     <div class="win-card">
-      <div class="emblem"><div class="rays"></div><svg viewBox="0 0 200 160" aria-hidden="true" id="winLotus"></svg></div>
+      <div class="emblem"><div class="rays"></div><svg viewBox="0 0 200 150" aria-hidden="true" id="winArt"></svg></div>
       <div class="ribbon" id="winTitle">Board Clear</div>
       <div class="perfect" id="winPerfect">Perfect Chain!</div>
       <div class="win-score" id="winScore">0</div>
@@ -274,7 +274,7 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
       <label class="row" for="optSound"><span>Sound effects</span><input type="checkbox" id="optSound"></label>
       <label class="row" for="optDim"><span>Shade tiles you can't pick</span><input type="checkbox" id="optDim"></label>
       <button class="row-btn" id="btnRestart">Restart this level<small>Deals a fresh board. Your win streak resets.</small></button>
-      <p class="howto">Tap a tile to send it up to the tray. Two identical tiles in the tray clear each other. The tray holds four tiles, so if it fills up with no pair, the level is over. A tile can be picked when nothing sits on top of it and its left or right side is open. Tiles marked Any flower match each other, and so do tiles marked Any season. Clear pairs quickly to grow your chain bonus.</p>
+      <p class="howto">Mahjong Picnic is ad-free. Tap a tile to send it up to the tray. Two identical tiles in the tray clear each other. The tray holds four tiles, so if it fills up with no pair, the level is over. A tile can be picked when nothing sits on top of it and its left or right side is open. Tiles marked Any flower match each other, and so do tiles marked Any season. Clear pairs quickly to grow your chain bonus.</p>
       <div class="danger">
         <button id="btnReset">Reset all progress</button>
         <div class="confirm" id="resetConfirm" hidden>Erase your level, streak and boosters?
@@ -912,7 +912,7 @@ const LINES = [
   'That last pair was hiding in plain sight.',
   'Quiet focus, clean board.',
   'You read the stack like an open book.',
-  'The lotus opens for a tidy table.'
+  'Not a crumb left on the blanket.'
 ];
 
 function startLevel(fresh) {
@@ -1020,24 +1020,30 @@ $('#resetYes').addEventListener('click', () => {
 
 addEventListener('resize', () => { if (G && !$('#play').hidden) { renderTray(); layoutBoard(); } });
 
-/* ================= lotus art ================= */
-function lotus(svg, w, h) {
-  const cx = w / 2, cy = h * .78;
-  const petal = (ang, len, wid, fill) => `<path transform="translate(${cx} ${cy}) rotate(${ang})" d="M0 0 C ${wid} ${-len*.3}, ${wid*.9} ${-len*.8}, 0 ${-len} C ${-wid*.9} ${-len*.8}, ${-wid} ${-len*.3}, 0 0 Z" fill="${fill}" stroke="#fff" stroke-opacity=".55" stroke-width="1.5"/>`;
-  let s = `<defs>
-    <linearGradient id="${svg.id}pa" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#e86f8f"/><stop offset=".6" stop-color="#ffb8c8"/><stop offset="1" stop-color="#fff2f4"/></linearGradient>
-    <linearGradient id="${svg.id}pb" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#d4506f"/><stop offset="1" stop-color="#ff9fb4"/></linearGradient>
-    <linearGradient id="${svg.id}lf" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5cc48a"/><stop offset="1" stop-color="#1d6e4a"/></linearGradient></defs>`;
-  s += `<ellipse cx="${cx}" cy="${cy + 6}" rx="${w*.46}" ry="${h*.1}" fill="url(#${svg.id}lf)"/>`;
-  s += `<ellipse cx="${cx}" cy="${cy + 3}" rx="${w*.34}" ry="${h*.06}" fill="#2f8c68" opacity=".7"/>`;
-  [-80, 80, -58, 58].forEach(a => s += petal(a, h * .42, h * .14, `url(#${svg.id}pb)`));
-  [-36, 36, -16, 16].forEach(a => s += petal(a, h * .6, h * .17, `url(#${svg.id}pa)`));
-  s += petal(0, h * .68, h * .18, `url(#${svg.id}pa)`);
-  s += `<circle cx="${cx}" cy="${cy - h*.06}" r="${h*.055}" fill="#f4c451" stroke="#fff" stroke-width="1.5"/>`;
-  svg.innerHTML = s;
+/* ================= picnic basket art ================= */
+function basket(svg) {
+  const id = svg.id;
+  const EMO = `font-family="'Apple Color Emoji','Segoe UI Emoji','Noto Color Emoji',sans-serif" text-anchor="middle"`;
+  svg.innerHTML = `<defs>
+    <pattern id="${id}g" width="12" height="12" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="#fff6ee"/><rect width="6" height="12" fill="#e2553c" opacity=".55"/><rect width="12" height="6" fill="#e2553c" opacity=".55"/></pattern>
+    <linearGradient id="${id}b" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d99a57"/><stop offset="1" stop-color="#a8652c"/></linearGradient></defs>
+    <ellipse cx="100" cy="141" rx="72" ry="7" fill="#000" opacity=".25"/>
+    <path d="M52 86 C 52 18, 148 18, 148 86" fill="none" stroke="#7a4a1f" stroke-width="10" stroke-linecap="round"/>
+    <path d="M52 86 C 52 18, 148 18, 148 86" fill="none" stroke="#c98a4b" stroke-width="4" stroke-linecap="round" stroke-dasharray="7 5"/>
+    <text x="74" y="86" font-size="34" ${EMO}>🍇</text>
+    <text x="126" y="86" font-size="32" ${EMO}>🍋</text>
+    <text x="100" y="80" font-size="38" ${EMO}>🍎</text>
+    <path d="M36 88 H164 L152 136 Q100 144 48 136 Z" fill="url(#${id}b)"/>
+    <g stroke="#8a5424" stroke-width="2" opacity=".55" fill="none">
+      <path d="M40 101 H160"/><path d="M43 114 H157"/><path d="M46 127 H154"/>
+      <path d="M62 90 L66 138"/><path d="M84 90 L86 140"/><path d="M106 90 L106 140"/><path d="M128 90 L126 140"/><path d="M148 90 L144 138"/></g>
+    <rect x="30" y="82" width="140" height="13" rx="6" fill="#8a5424"/>
+    <path d="M34 84 L64 84 L50 112 Z" fill="url(#${id}g)" stroke="#c43b27" stroke-width="1.2"/>
+    <path d="M166 84 L136 84 L150 112 Z" fill="url(#${id}g)" stroke="#c43b27" stroke-width="1.2"/>`;
 }
-lotus($('#logoLotus'), 200, 150);
-lotus($('#winLotus'), 200, 160);
+basket($('#logoArt'));
+basket($('#winArt'));
 
 /* ================= boot ================= */
 document.body.classList.toggle('dim', !!S.dim);

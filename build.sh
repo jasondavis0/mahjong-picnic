@@ -1,5 +1,5 @@
 #!/bin/zsh
-# Builds the installable web app into ./site from lotus-mahjong.html (the game source).
+# Builds the installable web app into ./docs from mahjong-picnic.html (the game source).
 set -e
 cd "$(dirname "$0")"
 OUT=docs
@@ -21,14 +21,14 @@ cat <<'EOF'
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Lotus Mahjong">
+<meta name="apple-mobile-web-app-title" content="Mahjong Picnic">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}</style>
 </head><body>
 EOF
-cat lotus-mahjong.html
+cat mahjong-picnic.html
 cat <<'EOF'
 <script>if('serviceWorker' in navigator&&location.protocol==='https:'){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}))}</script>
 </body></html>
@@ -38,8 +38,8 @@ EOF
 # Manifest
 cat > "$OUT/manifest.webmanifest" <<'EOF'
 {
-  "name": "Lotus Mahjong",
-  "short_name": "Mahjong",
+  "name": "Mahjong Picnic",
+  "short_name": "Picnic",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -55,7 +55,7 @@ EOF
 
 # Service worker: offline play. Page files are cached on install; fonts are cached the first time they load.
 cat > "$OUT/sw.js" <<EOF
-const CACHE = 'lotus-$VERSION';
+const CACHE = 'picnic-$VERSION';
 const FILES = ['./', 'index.html', 'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'apple-touch-icon.png'];
 self.addEventListener('install', e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(FILES))); self.skipWaiting(); });
 self.addEventListener('activate', e => {

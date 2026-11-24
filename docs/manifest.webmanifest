@@ -1,6 +1,6 @@
 {
-  "name": "Lotus Mahjong",
-  "short_name": "Mahjong",
+  "name": "Mahjong Picnic",
+  "short_name": "Picnic",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
